@@ -18,55 +18,55 @@ class Banco{
 
 	}
 
-	function getNumConta (){
+	public function getNumConta (){
 		return $this->numConta;
 	}
 
-	function setNumConta ($num){
+	public function setNumConta ($num){
 		$this->numConta = $num;
 	}
 
 
-	function getTipo () {
+	public function getTipo () {
 		return $this->tipo;
 	}
 
-	function setTipo ($tip){
+	public function setTipo ($tip){
 		$this->tipo = $tip;
 	}
 
 
-	function getDono (){
+	public function getDono (){
 		return $this->dono;
 	}
 
-	function setDono ($don){
+	public function setDono ($don){
 		$this->dono = $don;  
 	}
 
 
-	function getSaldo(){
+	public function getSaldo(){
 		return $this->saldo;
 	}
 
-	function setSaldo($sald){
+	public function setSaldo($sald){
 		$this->saldo = $sald;
 	}
 
 
-	function getStatus(){
+	public function getStatus(){
 		return $this->status;
 	}	
 
-	function setStatus($statu){
+	public function setStatus($statu){
 		$this->status = $statu;
 	}
 
-	function abrirConta(){
+	public function abrirConta(){
 		$this->setStatus(true);
 	}
 
-	function fecharConta(){
+	public function fecharConta(){
 		if($this->getSaldo() > 0 ){
 			echo "não é possível fechar a conta saldo positivo <br>";
 		}
@@ -76,6 +76,39 @@ class Banco{
 		else{
 			$this->setStatus(false);
 			echo "Conta fechada <br>";
+		}
+	}
+	
+	public function depositar ($depositar) {
+		if ($this->getStatus() != true) {
+			echo "essa conta nao esta aberta <br>";
+		}
+		else {
+			//$depositar = $depositar + $this->getSaldo(); 
+			$this->setSaldo($this->getSaldo() + $depositar);
+
+
+		}
+	}
+
+	public function sacar ($sacar){
+		if ($this->getStatus() != true ){
+			echo "essa conta nao esta aberta <br>" ;
+		}
+		else{
+			$sacar = $this->getSaldo() - $sacar;
+			$this->setSaldo($sacar); 
+		}
+	
+	}
+
+	public function pagarMensal(){
+		if($this->getTipo() == "cc" ){
+			$pagar = $this->getSaldo() - 20;
+			$this->setSaldo($pagar);
+		}
+		else{
+			$pagar = $this->getSaldo() - 10;
 		}
 	}
 }
